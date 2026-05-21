@@ -1,13 +1,8 @@
 import sys
 import os
-from unicodedata import category
-from matplotlib import category
-from sympy import re
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+import re
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
-import networkx as nx
-import re
 
 load_dotenv()
 
