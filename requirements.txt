@@ -5,3 +5,7 @@ networkx
 matplotlib
 streamlit
 jupyter
+langgraph
+langchain-google-genai
+langchain-core
+python-dotenv
