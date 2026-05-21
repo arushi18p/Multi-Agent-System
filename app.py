@@ -202,15 +202,13 @@ def style_fraud_column(df_table: pd.DataFrame):
     if df_table.empty or "fraud" not in df_table.columns:
         return df_table
 
-    return df_table.style.applymap(
+    return df_table.style.map(
         lambda v: "background-color: #8b0000; color: white;" if v == 1 else "",
         subset=["fraud"]
     )
 
 
-# -----------------------------
-# Load Data
-# -----------------------------
+
 @st.cache_data
 def load_data():
     return pd.read_csv("data/processed/banksim_risk_scored.csv")
@@ -222,9 +220,7 @@ agent_graph = build_graph()
 fraud_rows = df[df["fraud"] == 1].copy()
 
 
-# -----------------------------
-# Title + Overview
-# -----------------------------
+
 st.title("Fraud Network Analysis")
 
 st.write(
@@ -243,9 +239,6 @@ This system demonstrates how fraud detection signals can be integrated into a gr
 )
 
 
-# -----------------------------
-# Sidebar Controls
-# -----------------------------
 st.sidebar.header("Controls")
 
 mode = st.sidebar.selectbox(
@@ -272,15 +265,9 @@ else:
 run_search = st.sidebar.button("Run Analysis")
 
 
-# -----------------------------
-# Tabs
-# -----------------------------
 tab_main, tab_sensitivity, tab_agents = st.tabs(["Search Analysis", "Sensitivity Analysis", "Multi-Agent Workflow"])
 
 
-# ============================================================
-# TAB 1 — original content, untouched
-# ============================================================
 with tab_main:
 
     st.subheader("Dataset Summary")
@@ -387,9 +374,7 @@ with tab_main:
         st.info("Choose a scenario in the sidebar and click 'Run Analysis'.")
 
 
-# ============================================================
-# TAB 2 — Sensitivity Analysis
-# ============================================================
+
 with tab_sensitivity:
     st.header("Sensitivity Analysis & Perturbation Tests")
     st.write(
@@ -404,9 +389,7 @@ with tab_sensitivity:
 
     st.divider()
 
-    # ----------------------------------------------------------------
-    # 1. Edge-Weight Perturbation
-    # ----------------------------------------------------------------
+
     st.subheader("1 · Edge-Weight Perturbation")
     st.write(
         "Gaussian noise (σ) is added to every edge cost. "
@@ -523,9 +506,6 @@ with tab_sensitivity:
 
     st.divider()
 
-    # ----------------------------------------------------------------
-    # 3. Risk Threshold Sweep
-    # ----------------------------------------------------------------
     st.subheader("3 · Risk Classification Threshold Sweep")
     st.write(
         "Sweeps the fraud-risk threshold that determines which transactions "
@@ -578,9 +558,7 @@ with tab_sensitivity:
 
     st.divider()
 
-    # ----------------------------------------------------------------
-    # 4. Monte Carlo Simulation
-    # ----------------------------------------------------------------
+ 
     st.subheader("4 · Monte Carlo Perturbation Simulation")
     st.write(
         "Runs many independently-perturbed copies of the graph to build "
